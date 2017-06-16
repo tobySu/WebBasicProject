@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dubbo.person.dao.ITopicFavoriteInfoDao">
+	<resultMap id="BaseResultMap" type="com.dubbo.person.model.TopicFavoriteInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="contentDescription" property="contentDescription"
+			jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="sectionId" property="sectionId" jdbcType="INTEGER" />
+		<result column="userThirdId" property="userThirdId" jdbcType="INTEGER" />
+		<result column="contentImg" property="contentImg" jdbcType="VARCHAR" />
+		<result column="portalId" property="portalId" jdbcType="INTEGER" />
+		<result column="userId" property="userId" jdbcType="INTEGER" />
+		<result column="contentName" property="contentName" jdbcType="VARCHAR" />
+		<result column="feeFlag" property="feeFlag" jdbcType="INTEGER" />
+		<result column="contentType" property="contentType" jdbcType="INTEGER" />
+		<result column="remindFlag" property="remindFlag" jdbcType="INTEGER" />
+		<result column="contentId" property="contentId" jdbcType="INTEGER" />
+
+	</resultMap>
+
+
+
+	<sql id="Base_Column_List">
+		id,
+		contentDescription,createTime,sectionId,userThirdId,contentImg,
+		portalId,userId,contentName,feeFlag,contentType,
+		remindFlag,contentId
+	</sql>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from TOPIC_FAVORITE_INFO
+		where id=#{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByPrimaryKeyBatch" parameterType="java.lang.Integer">
+		delete from TOPIC_FAVORITE_INFO
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+
+	<insert id="insert" parameterType="com.dubbo.person.model.TopicFavoriteInfo">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into TOPIC_FAVORITE_INFO
+		(contentDescription,createTime,sectionId,userThirdId,contentImg,portalId,userId,contentName,feeFlag,contentType,remindFlag,contentId)
+		values
+		(#{contentDescription,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP},#{sectionId,jdbcType=INTEGER},#{userThirdId,jdbcType=INTEGER},#{contentImg,jdbcType=VARCHAR},#{portalId,jdbcType=INTEGER},#{userId,jdbcType=INTEGER},#{contentName,jdbcType=VARCHAR},#{feeFlag,jdbcType=INTEGER},#{contentType,jdbcType=INTEGER},#{remindFlag,jdbcType=INTEGER},#{contentId,jdbcType=INTEGER})
+	</insert>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TOPIC_FAVORITE_INFO
+		where id=#{id,jdbcType=INTEGER}
+	</select>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.dubbo.person.model.TopicFavoriteInfo">
+		update TOPIC_FAVORITE_INFO
+		<set>
+			<if test="id != null">
+				id= #{id,jdbcType=INTEGER},
+			</if>
+			<if test="contentDescription != null">
+				contentDescription= #{contentDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				createTime= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sectionId != null">
+				sectionId= #{sectionId,jdbcType=INTEGER},
+			</if>
+			<if test="userThirdId != null">
+				userThirdId= #{userThirdId,jdbcType=INTEGER},
+			</if>
+			<if test="contentImg != null">
+				contentImg= #{contentImg,jdbcType=VARCHAR},
+			</if>
+			<if test="portalId != null">
+				portalId= #{portalId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				userId= #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="contentName != null">
+				contentName= #{contentName,jdbcType=VARCHAR},
+			</if>
+			<if test="feeFlag != null">
+				feeFlag= #{feeFlag,jdbcType=INTEGER},
+			</if>
+			<if test="contentType != null">
+				contentType= #{contentType,jdbcType=INTEGER},
+			</if>
+			<if test="remindFlag != null">
+				remindFlag= #{remindFlag,jdbcType=INTEGER},
+			</if>
+			<if test="contentId != null">
+				contentId= #{contentId,jdbcType=INTEGER},
+			</if>
+
+		</set>
+		where id=#{id,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.dubbo.person.model.TopicFavoriteInfo">
+		update TOPIC_FAVORITE_INFO
+		set id= #{id,jdbcType=INTEGER},
+		contentDescription= #{contentDescription,jdbcType=VARCHAR},
+		createTime= #{createTime,jdbcType=TIMESTAMP},
+		sectionId= #{sectionId,jdbcType=INTEGER},
+		userThirdId= #{userThirdId,jdbcType=INTEGER},
+		contentImg= #{contentImg,jdbcType=VARCHAR},
+		portalId= #{portalId,jdbcType=INTEGER},
+		userId= #{userId,jdbcType=INTEGER},
+		contentName= #{contentName,jdbcType=VARCHAR},
+		feeFlag= #{feeFlag,jdbcType=INTEGER},
+		contentType= #{contentType,jdbcType=INTEGER},
+		remindFlag= #{remindFlag,jdbcType=INTEGER},
+		contentId= #{contentId,jdbcType=INTEGER}
+		where id=#{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="getList" resultMap="BaseResultMap"
+		parameterType="com.dubbo.person.model.UserQueryModel">
+		select * from TOPIC_FAVORITE_INFO
+		<where>
+			<if test="id != null">
+				id= #{id,jdbcType=INTEGER},
+			</if>
+			<if test="contentDescription != null">
+				contentDescription= #{contentDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				createTime= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sectionId != null">
+				sectionId= #{sectionId,jdbcType=INTEGER},
+			</if>
+			<if test="userThirdId != null">
+				userThirdId= #{userThirdId,jdbcType=INTEGER},
+			</if>
+			<if test="contentImg != null">
+				contentImg= #{contentImg,jdbcType=VARCHAR},
+			</if>
+			<if test="portalId != null">
+				portalId= #{portalId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				userId= #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="contentName != null">
+				contentName= #{contentName,jdbcType=VARCHAR},
+			</if>
+			<if test="feeFlag != null">
+				feeFlag= #{feeFlag,jdbcType=INTEGER},
+			</if>
+			<if test="contentType != null">
+				contentType= #{contentType,jdbcType=INTEGER},
+			</if>
+			<if test="remindFlag != null">
+				remindFlag= #{remindFlag,jdbcType=INTEGER},
+			</if>
+			<if test="contentId != null">
+				contentId= #{contentId,jdbcType=INTEGER},
+			</if>
+
+		</where>
+		order by id desc
+	</select>
+
+</mapper>
+
